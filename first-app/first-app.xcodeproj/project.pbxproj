@@ -15,6 +15,7 @@
 		D26ED6D11D6622BE00875BCE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D26ED6CF1D6622BE00875BCE /* LaunchScreen.storyboard */; };
 		D26ED6DC1D6622BE00875BCE /* first_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26ED6DB1D6622BE00875BCE /* first_appTests.swift */; };
 		D26ED6E71D6622BE00875BCE /* first_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26ED6E61D6622BE00875BCE /* first_appUITests.swift */; };
+		D2DD44231D6CD1CF0041B74D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DD44221D6CD1CF0041B74D /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		D26ED6E21D6622BE00875BCE /* first-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "first-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D26ED6E61D6622BE00875BCE /* first_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = first_appUITests.swift; sourceTree = "<group>"; };
 		D26ED6E81D6622BE00875BCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2DD44221D6CD1CF0041B74D /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				D26ED6CF1D6622BE00875BCE /* LaunchScreen.storyboard */,
 				D26ED6D21D6622BE00875BCE /* Info.plist */,
 				D26ED6CA1D6622BE00875BCE /* first_app.xcdatamodeld */,
+				D2DD44221D6CD1CF0041B74D /* TableViewController.swift */,
 			);
 			path = "first-app";
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				D26ED6CC1D6622BE00875BCE /* first_app.xcdatamodeld in Sources */,
 				D26ED6C61D6622BE00875BCE /* ViewController.swift in Sources */,
 				D26ED6C41D6622BE00875BCE /* AppDelegate.swift in Sources */,
+				D2DD44231D6CD1CF0041B74D /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +492,7 @@
 				D26ED6ED1D6622BE00875BCE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D26ED6EE1D6622BE00875BCE /* Build configuration list for PBXNativeTarget "first-appTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +501,7 @@
 				D26ED6F01D6622BE00875BCE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D26ED6F11D6622BE00875BCE /* Build configuration list for PBXNativeTarget "first-appUITests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +510,7 @@
 				D26ED6F31D6622BE00875BCE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
