@@ -10,10 +10,22 @@ import UIKit
 
 class ApiViewController: UIViewController {
 
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        self.title = "Muni API"
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view, typically from a nib.
+        self.title = "NASA API"
+        
+                
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let apiController = APIController()
+        let today = NSDate()
+        apiController.getAPOD(today)
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,5 +43,7 @@ class ApiViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+
 
 }
