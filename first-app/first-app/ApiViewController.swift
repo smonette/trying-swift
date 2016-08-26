@@ -10,23 +10,7 @@ import UIKit
 
 class ApiViewController: UIViewController {
 
-    
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        self.title = "NASA API"
-        
-                
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        let apiController = APIController()
-        let today = NSDate()
-        apiController.getAPOD(today)
-    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -43,7 +27,33 @@ class ApiViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        self.title = "Sample API"
 
+        let requestURL: NSURL = NSURL(string: "http://www.learnswiftonline.com/Samples/subway.json")!
+        let urlRequest: NSMutableURLRequest = NSMutableURLRequest(URL: requestURL)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(urlRequest) {
+            (data, response, error) -> Void in
+            
+            let httpResponse = response as! NSHTTPURLResponse
+            let statusCode = httpResponse.statusCode
+            
+            if (statusCode == 200) {
+                print("Everyone is fine, file downloaded successfully.")
+            } else {
+                print("What is even going on")
+
+            }
+        }
+        
+        task.resume()
+        
+    }
 
 
 }
