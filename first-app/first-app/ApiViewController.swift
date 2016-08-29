@@ -33,8 +33,9 @@ class ApiViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.title = "Sample API"
-
-        let requestURL: NSURL = NSURL(string: "http://www.learnswiftonline.com/Samples/subway.json")!
+        let myUrl = "http://restbus.info/api/agencies/sf-muni/routes/L/stop/5650/predictions"
+        
+        let requestURL: NSURL = NSURL(string: myUrl)!
         let urlRequest: NSMutableURLRequest = NSMutableURLRequest(URL: requestURL)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(urlRequest) {
@@ -45,9 +46,35 @@ class ApiViewController: UIViewController {
             
             if (statusCode == 200) {
                 print("Everyone is fine, file downloaded successfully.")
-            } else {
-                print("What is even going on")
+                
+                
+                do {
+                    
+                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
+                    
+                    if let stations = json["ServiceDelivery"] as? [[String: AnyObject]] {
+                        
+                        for station in stations {
+                            
+                            if let name = station["stationName"] as? String {
+                                
+                                if let year = station["buildYear"] as? String {
+                                    print(name,year)
+                                }
+                                
+                            }
+                        }
+                        
+                    }
+                    
+                } catch {
+                    print("Error with Json: \(error)")
+                }
 
+                
+                
+            } else {
+                print("nothing happened?")
             }
         }
         
