@@ -11,6 +11,10 @@ import UIKit
 class ApiViewController: UIViewController {
 
 
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -31,9 +35,11 @@ class ApiViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        uiStyling()
+        
         // Do any additional setup after loading the view, typically from a nib.
-        self.title = "Sample API"
-        let myUrl = "http://restbus.info/api/agencies/sf-muni/routes/L/stop/5650/predictions"
+        self.title = "Some Rando"
+        let myUrl = "https://randomuser.me/api/"
         
         let requestURL: NSURL = NSURL(string: myUrl)!
         let urlRequest: NSMutableURLRequest = NSMutableURLRequest(URL: requestURL)
@@ -47,25 +53,31 @@ class ApiViewController: UIViewController {
             if (statusCode == 200) {
                 print("Everyone is fine, file downloaded successfully.")
                 
-                
                 do {
+                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments) as! NSDictionary
                     
-                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
+                    let nameData = (json["results"] as! NSArray)[0]["name"] as! NSDictionary
+                    let firstNameData = (nameData["first"] as? String)?.capitalizedString
+                    let lastNameData = (nameData["last"] as? String)?.capitalizedString
+                    let fullNameData = firstNameData! + " " + lastNameData!
                     
-                    if let stations = json["ServiceDelivery"] as? [[String: AnyObject]] {
-                        
-                        for station in stations {
-                            
-                            if let name = station["stationName"] as? String {
-                                
-                                if let year = station["buildYear"] as? String {
-                                    print(name,year)
-                                }
-                                
-                            }
+                    let imgData = (json["results"] as! NSArray)[0]["picture"] as! NSDictionary
+                    let userImg = imgData["large"] as? String
+
+//                    print(json["results"])
+                    
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+
+                        self.nameLabel.text = fullNameData
+
+                        if let url  = NSURL(string: userImg!), data = NSData(contentsOfURL: url) {
+                            self.imageView.image = UIImage(data: data)
                         }
                         
-                    }
+                    })
+                    
+                    
                     
                 } catch {
                     print("Error with Json: \(error)")
@@ -80,6 +92,11 @@ class ApiViewController: UIViewController {
         
         task.resume()
         
+    }
+
+    
+    func uiStyling() {
+            imageView.layer.cornerRadius = 50
     }
 
 
