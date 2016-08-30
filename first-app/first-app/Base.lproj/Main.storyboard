@@ -159,6 +159,13 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ww-HS-2YZ">
+                                <rect key="frame" x="35" y="427" width="91" height="30"/>
+                                <state key="normal" title="More Randos"/>
+                                <connections>
+                                    <action selector="moreRandosButton:" destination="m1x-Ow-zAW" eventType="touchUpInside" id="52v-bc-8Va"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
