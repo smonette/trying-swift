@@ -82,6 +82,7 @@ class CalculatorViewController: UIViewController {
         switch passedValue {
         case "clear":
             self.calculation = 0
+            updateDisplay("clear")
         case "=":
             answerLabel.text = String(calculation)
         case "/":
@@ -105,16 +106,11 @@ class CalculatorViewController: UIViewController {
     func updateDisplay(passedValue: String){
         if(self.answerLabel.text == "0") {
             answerLabel.text = passedValue
+        } else if(passedValue == "clear"){
+            answerLabel.text = "0"
         } else {
             answerLabel.text = answerLabel.text! + passedValue
         }
     }
-    
-
-    
-    
-    
-    
-    
 
 }
