@@ -9,12 +9,14 @@
 import UIKit
 
 class ApiViewController: UIViewController {
-
+    var emailAddress = ""
+    var phoneNumber = ""
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UIButton!
+    @IBOutlet weak var emailLabel: UIButton!
     
     
 
@@ -30,12 +32,10 @@ class ApiViewController: UIViewController {
     */
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         self.title = "Some Rando"
         fetchRandos()
         uiStyling()
-
     }
 
     
@@ -45,6 +45,18 @@ class ApiViewController: UIViewController {
         uiStyling()
     }
     
+    @IBAction func sendEmailButton(sender: AnyObject) {
+        if let emailUrl = NSURL(string: "mailto:" + emailAddress){
+            UIApplication.sharedApplication().openURL(emailUrl)
+        }
+    }
+
+    @IBAction func makeCallButton(sender: AnyObject) {
+        if let phoneUrl = NSURL(string: "tel://" + phoneNumber) {
+            UIApplication.sharedApplication().openURL(phoneUrl)
+        }
+        
+    }
 
     
     // MARK: - API Call
@@ -77,18 +89,24 @@ class ApiViewController: UIViewController {
                     
                     let userEmail = (json["results"] as! NSArray)[0]["email"] as! String
                     
+                    let userPhone = (json["results"] as! NSArray)[0]["cell"] as! String
+                    
                     let imgData = (json["results"] as! NSArray)[0]["picture"] as! NSDictionary
                     let userImg = imgData["large"] as? String
                     
                     dispatch_async(dispatch_get_main_queue(), {
+                        if let imgUrl  = NSURL(string: userImg!), data = NSData(contentsOfURL: imgUrl) {
+                            self.imageView.image = UIImage(data: data)
+                        }
                         
                         self.nameLabel.text = fullNameData
                         self.usernameLabel.text = usernameData
-                        self.emailLabel.text = userEmail
                         
-                        if let url  = NSURL(string: userImg!), data = NSData(contentsOfURL: url) {
-                            self.imageView.image = UIImage(data: data)
-                        }
+                        self.emailLabel.setTitle(userEmail, forState: UIControlState.Normal)
+                        self.emailAddress = userEmail
+
+                        self.phoneLabel.setTitle(userPhone, forState: UIControlState.Normal)
+                        self.phoneNumber = userPhone
                         
                     })
                     
@@ -97,8 +115,7 @@ class ApiViewController: UIViewController {
                 } catch {
                     print("Error with Json: \(error)")
                 }
-                
-                
+
                 
             } else {
                 print("nothing happened?")

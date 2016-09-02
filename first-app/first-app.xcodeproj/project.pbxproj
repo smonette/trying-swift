@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D24FA7F61D6E44D3003CEA8E /* ColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24FA7F51D6E44D3003CEA8E /* ColorsViewController.swift */; };
 		D24FA7F81D6E469D003CEA8E /* ApiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24FA7F71D6E469D003CEA8E /* ApiViewController.swift */; };
+		D25701191D7A1AB900AC8423 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25701181D7A1AB900AC8423 /* CalculatorViewController.swift */; };
 		D26ED6C41D6622BE00875BCE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26ED6C31D6622BE00875BCE /* AppDelegate.swift */; };
 		D26ED6C61D6622BE00875BCE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26ED6C51D6622BE00875BCE /* ViewController.swift */; };
 		D26ED6C91D6622BE00875BCE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D26ED6C71D6622BE00875BCE /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		D24FA7F51D6E44D3003CEA8E /* ColorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsViewController.swift; sourceTree = "<group>"; };
 		D24FA7F71D6E469D003CEA8E /* ApiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiViewController.swift; sourceTree = "<group>"; };
+		D25701181D7A1AB900AC8423 /* CalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		D26ED6C01D6622BE00875BCE /* first-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "first-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D26ED6C31D6622BE00875BCE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D26ED6C51D6622BE00875BCE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			children = (
 				D26ED6C31D6622BE00875BCE /* AppDelegate.swift */,
 				D26ED6C51D6622BE00875BCE /* ViewController.swift */,
+				D25701181D7A1AB900AC8423 /* CalculatorViewController.swift */,
 				D24FA7F51D6E44D3003CEA8E /* ColorsViewController.swift */,
 				D26ED6C71D6622BE00875BCE /* Main.storyboard */,
 				D24FA7F71D6E469D003CEA8E /* ApiViewController.swift */,
@@ -274,6 +277,7 @@
 				D26ED6CC1D6622BE00875BCE /* first_app.xcdatamodeld in Sources */,
 				D26ED6C61D6622BE00875BCE /* ViewController.swift in Sources */,
 				D26ED6C41D6622BE00875BCE /* AppDelegate.swift in Sources */,
+				D25701191D7A1AB900AC8423 /* CalculatorViewController.swift in Sources */,
 				D2DD44231D6CD1CF0041B74D /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

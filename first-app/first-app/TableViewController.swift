@@ -11,7 +11,7 @@ import UIKit
 class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // Data model: These strings will be the data for the table view cells
-    let apps: [String] = ["Colors", "Rando Generator", "App 3"]
+    let apps: [String] = ["Colors", "Rando Generator", "Calculator"]
     
     // cell reuse id (cells that scroll out of view can be reused)
     let cellReuseIdentifier = "cell"
