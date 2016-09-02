@@ -9,7 +9,9 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-
+    var digits = ""
+    var calculation = 0
+    
     @IBOutlet weak var answerLabel: UILabel!
     
     override func viewDidLoad() {
@@ -26,65 +28,93 @@ class CalculatorViewController: UIViewController {
     
     //    MARK: - Button functions
     @IBAction func equalButton(sender: AnyObject) {
+        calculate("=")
     }
     @IBAction func divideButton(sender: AnyObject) {
-        updateDisplay("/")
+        calculate("/")
     }
     @IBAction func multiButton(sender: AnyObject) {
-        updateDisplay("*")
+        calculate("*")
     }
     @IBAction func minusButton(sender: AnyObject) {
-        updateDisplay("-")
+        calculate("-")
     }
     @IBAction func plusButton(sender: AnyObject) {
-        updateDisplay("+")
+        calculate("+")
     }
     @IBAction func clearButton(sender: AnyObject) {
-        clearDisplay()
+        calculate("clear")
     }
     @IBAction func nineButton(sender: AnyObject) {
-        updateDisplay("9")
+        calculate("9")
     }
     @IBAction func eightButton(sender: AnyObject) {
-        updateDisplay("8")
+        calculate("8")
     }
     @IBAction func sevenButton(sender: AnyObject) {
-        updateDisplay("7")
+        calculate("7")
     }
     @IBAction func sixButton(sender: AnyObject) {
-        updateDisplay("6")
+        calculate("6")
     }
     @IBAction func fiveButton(sender: AnyObject) {
-        updateDisplay("5")
+        calculate("5")
     }
     @IBAction func fourButton(sender: AnyObject) {
-        updateDisplay("4")
+        calculate("4")
     }
     @IBAction func threeButton(sender: AnyObject) {
-        updateDisplay("3")
+        calculate("3")
     }
     @IBAction func twoButton(sender: AnyObject) {
-        updateDisplay("2")
+        calculate("2")
     }
     @IBAction func oneButton(sender: AnyObject) {
-        updateDisplay("1")
+        calculate("1")
     }
     @IBAction func zeroButton(sender: AnyObject) {
-        updateDisplay("0")
+        calculate("0")
     }
 
     // MARK: - Do the math
     
-    func clearDisplay() {
-        answerLabel.text = "0"
+    func calculate(passedValue: String) {
+        switch passedValue {
+        case "clear":
+            self.calculation = 0
+        case "=":
+            answerLabel.text = String(calculation)
+        case "/":
+            updateDisplay(passedValue)
+        case "*":
+            updateDisplay(passedValue)
+        case "+":
+            updateDisplay(passedValue)
+        case "-":
+            updateDisplay(passedValue)
+        case "0","1","2","3","4","5","6","7","8","9":
+            updateDisplay(passedValue)
+            print(passedValue)
+        default:
+            updateDisplay(passedValue)
+        }
+    
+        
     }
-    func updateDisplay(passedValue: String) {
-        if (answerLabel.text == "0"){
+    
+    func updateDisplay(passedValue: String){
+        if(self.answerLabel.text == "0") {
             answerLabel.text = passedValue
         } else {
             answerLabel.text = answerLabel.text! + passedValue
-
         }
     }
+    
+
+    
+    
+    
+    
+    
 
 }
