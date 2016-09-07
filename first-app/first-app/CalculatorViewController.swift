@@ -10,7 +10,7 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     var digits = ""
-    var calculation = 0
+    var calculation = 0.0 as Float
     
     @IBOutlet weak var answerLabel: UILabel!
     
@@ -27,6 +27,9 @@ class CalculatorViewController: UIViewController {
     }
     
     //    MARK: - Button functions
+    @IBAction func decimalButton(sender: AnyObject) {
+        calculate(".")
+    }
     @IBAction func equalButton(sender: AnyObject) {
         calculate("=")
     }
@@ -79,23 +82,20 @@ class CalculatorViewController: UIViewController {
     // MARK: - Do the math
     
     func calculate(passedValue: String) {
+        
         switch passedValue {
         case "clear":
             self.calculation = 0
-            updateDisplay("clear")
+            updateDisplay("0")
         case "=":
-            answerLabel.text = String(calculation)
-        case "/":
+            
+            equal()
+        case ".":
             updateDisplay(passedValue)
-        case "*":
-            updateDisplay(passedValue)
-        case "+":
-            updateDisplay(passedValue)
-        case "-":
+        case "/", "*", "+", "-":
             updateDisplay(passedValue)
         case "0","1","2","3","4","5","6","7","8","9":
             updateDisplay(passedValue)
-            print(passedValue)
         default:
             updateDisplay(passedValue)
         }
@@ -104,7 +104,7 @@ class CalculatorViewController: UIViewController {
     }
     
     func updateDisplay(passedValue: String){
-        if(self.answerLabel.text == "0") {
+        if (self.answerLabel.text == "0") {
             answerLabel.text = passedValue
         } else if(passedValue == "clear"){
             answerLabel.text = "0"
@@ -112,5 +112,18 @@ class CalculatorViewController: UIViewController {
             answerLabel.text = answerLabel.text! + passedValue
         }
     }
+    func equal() {
+        print(answerLabel.text!)
+        
+        let ourMath = NSExpression(format: answerLabel.text!)
+        let result = ourMath.expressionValueWithObject(nil, context: nil) as! Float
+        
+        let cleanResult = roundf(100 * result) / 100.0;
+        
+        self.calculation = result
+        
+        answerLabel.text = String(cleanResult)
+    }
+
 
 }
