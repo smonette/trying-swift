@@ -40,20 +40,20 @@ class ApiViewController: UIViewController {
 
     
     
-    @IBAction func moreRandosButton(sender: AnyObject) {
+    @IBAction func moreRandosButton(_ sender: AnyObject) {
         fetchRandos()
         uiStyling()
     }
     
-    @IBAction func sendEmailButton(sender: AnyObject) {
-        if let emailUrl = NSURL(string: "mailto:" + emailAddress){
-            UIApplication.sharedApplication().openURL(emailUrl)
+    @IBAction func sendEmailButton(_ sender: AnyObject) {
+        if let emailUrl = URL(string: "mailto:" + emailAddress){
+            UIApplication.shared.openURL(emailUrl)
         }
     }
 
-    @IBAction func makeCallButton(sender: AnyObject) {
-        if let phoneUrl = NSURL(string: "tel://" + phoneNumber) {
-            UIApplication.sharedApplication().openURL(phoneUrl)
+    @IBAction func makeCallButton(_ sender: AnyObject) {
+        if let phoneUrl = URL(string: "tel://" + phoneNumber) {
+            UIApplication.shared.openURL(phoneUrl)
         }
         
     }
@@ -64,24 +64,24 @@ class ApiViewController: UIViewController {
         
         let myUrl = "https://randomuser.me/api/"
         
-        let requestURL: NSURL = NSURL(string: myUrl)!
-        let urlRequest: NSMutableURLRequest = NSMutableURLRequest(URL: requestURL)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(urlRequest) {
+        let requestURL: URL = URL(string: myUrl)!
+        let urlRequest: NSMutableURLRequest = NSMutableURLRequest(url: requestURL)
+        let session = URLSession.shared
+        let task = session.dataTask(with: urlRequest, completionHandler: {
             (data, response, error) -> Void in
             
-            let httpResponse = response as! NSHTTPURLResponse
+            let httpResponse = response as! HTTPURLResponse
             let statusCode = httpResponse.statusCode
             
             if (statusCode == 200) {
                 print("Everyone is fine, file downloaded successfully.")
                 
                 do {
-                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments) as! NSDictionary
+                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! NSDictionary
                     
                     let nameData = (json["results"] as! NSArray)[0]["name"] as! NSDictionary
-                    let firstNameData = (nameData["first"] as? String)?.capitalizedString
-                    let lastNameData = (nameData["last"] as? String)?.capitalizedString
+                    let firstNameData = (nameData["first"] as? String)?.capitalized
+                    let lastNameData = (nameData["last"] as? String)?.capitalized
                     let fullNameData = firstNameData! + " " + lastNameData!
                     
                     let loginData = (json["results"] as! NSArray)[0]["login"] as! NSDictionary
@@ -94,18 +94,18 @@ class ApiViewController: UIViewController {
                     let imgData = (json["results"] as! NSArray)[0]["picture"] as! NSDictionary
                     let userImg = imgData["large"] as? String
                     
-                    dispatch_async(dispatch_get_main_queue(), {
-                        if let imgUrl  = NSURL(string: userImg!), data = NSData(contentsOfURL: imgUrl) {
+                    DispatchQueue.main.async(execute: {
+                        if let imgUrl  = URL(string: userImg!), let data = try? Data(contentsOf: imgUrl) {
                             self.imageView.image = UIImage(data: data)
                         }
                         
                         self.nameLabel.text = fullNameData
                         self.usernameLabel.text = usernameData
                         
-                        self.emailLabel.setTitle(userEmail, forState: UIControlState.Normal)
+                        self.emailLabel.setTitle(userEmail, for: UIControlState())
                         self.emailAddress = userEmail
 
-                        self.phoneLabel.setTitle(userPhone, forState: UIControlState.Normal)
+                        self.phoneLabel.setTitle(userPhone, for: UIControlState())
                         self.phoneNumber = userPhone
                         
                     })
@@ -120,7 +120,7 @@ class ApiViewController: UIViewController {
             } else {
                 print("nothing happened?")
             }
-        }
+        }) 
         
         task.resume()
         

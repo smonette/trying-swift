@@ -27,61 +27,61 @@ class CalculatorViewController: UIViewController {
     }
     
     //    MARK: - Button functions
-    @IBAction func decimalButton(sender: AnyObject) {
+    @IBAction func decimalButton(_ sender: AnyObject) {
         calculate(".")
     }
-    @IBAction func equalButton(sender: AnyObject) {
+    @IBAction func equalButton(_ sender: AnyObject) {
         calculate("=")
     }
-    @IBAction func divideButton(sender: AnyObject) {
+    @IBAction func divideButton(_ sender: AnyObject) {
         calculate("/")
     }
-    @IBAction func multiButton(sender: AnyObject) {
+    @IBAction func multiButton(_ sender: AnyObject) {
         calculate("*")
     }
-    @IBAction func minusButton(sender: AnyObject) {
+    @IBAction func minusButton(_ sender: AnyObject) {
         calculate("-")
     }
-    @IBAction func plusButton(sender: AnyObject) {
+    @IBAction func plusButton(_ sender: AnyObject) {
         calculate("+")
     }
-    @IBAction func clearButton(sender: AnyObject) {
+    @IBAction func clearButton(_ sender: AnyObject) {
         calculate("clear")
     }
-    @IBAction func nineButton(sender: AnyObject) {
+    @IBAction func nineButton(_ sender: AnyObject) {
         calculate("9")
     }
-    @IBAction func eightButton(sender: AnyObject) {
+    @IBAction func eightButton(_ sender: AnyObject) {
         calculate("8")
     }
-    @IBAction func sevenButton(sender: AnyObject) {
+    @IBAction func sevenButton(_ sender: AnyObject) {
         calculate("7")
     }
-    @IBAction func sixButton(sender: AnyObject) {
+    @IBAction func sixButton(_ sender: AnyObject) {
         calculate("6")
     }
-    @IBAction func fiveButton(sender: AnyObject) {
+    @IBAction func fiveButton(_ sender: AnyObject) {
         calculate("5")
     }
-    @IBAction func fourButton(sender: AnyObject) {
+    @IBAction func fourButton(_ sender: AnyObject) {
         calculate("4")
     }
-    @IBAction func threeButton(sender: AnyObject) {
+    @IBAction func threeButton(_ sender: AnyObject) {
         calculate("3")
     }
-    @IBAction func twoButton(sender: AnyObject) {
+    @IBAction func twoButton(_ sender: AnyObject) {
         calculate("2")
     }
-    @IBAction func oneButton(sender: AnyObject) {
+    @IBAction func oneButton(_ sender: AnyObject) {
         calculate("1")
     }
-    @IBAction func zeroButton(sender: AnyObject) {
+    @IBAction func zeroButton(_ sender: AnyObject) {
         calculate("0")
     }
 
     // MARK: - Do the math
     
-    func calculate(passedValue: String) {
+    func calculate(_ passedValue: String) {
         
         switch passedValue {
         case "clear":
@@ -103,7 +103,7 @@ class CalculatorViewController: UIViewController {
         
     }
     
-    func updateDisplay(passedValue: String){
+    func updateDisplay(_ passedValue: String){
         if (self.answerLabel.text == "0") {
             answerLabel.text = passedValue
         } else if(passedValue == "clear"){
@@ -116,7 +116,7 @@ class CalculatorViewController: UIViewController {
         print(answerLabel.text!)
         
         let ourMath = NSExpression(format: answerLabel.text!)
-        let result = ourMath.expressionValueWithObject(nil, context: nil) as! Float
+        let result = ourMath.expressionValue(with: nil, context: nil) as! Float
         
         let cleanResult = roundf(100 * result) / 100.0;
         

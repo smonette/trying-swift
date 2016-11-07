@@ -36,7 +36,7 @@ class ColorsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func button1(sender: AnyObject) {
+    @IBAction func button1(_ sender: AnyObject) {
         changeColor(brick1)
         changeColor(brick2)
         changeColor(brick3)
@@ -53,7 +53,7 @@ class ColorsViewController: UIViewController {
         changeColor(brick14)
     }
     
-    func changeColor(passedView:UIView) {
+    func changeColor(_ passedView:UIView) {
         // Generate Random Numbers
         let r = CGFloat(arc4random() % 255)
         let g = CGFloat(arc4random() % 255)
