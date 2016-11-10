@@ -64,64 +64,134 @@ class ApiViewController: UIViewController {
         
         let myUrl = "https://randomuser.me/api/"
         
-        let requestURL: URL = URL(string: myUrl)!
-        let urlRequest: NSMutableURLRequest = NSMutableURLRequest(url: requestURL)
+//        let requestURL: URL = URL(string: myUrl)!
+//        let urlRequest: NSMutableURLRequest = NSMutableURLRequest(url: requestURL)
         let session = URLSession.shared
-        let task = session.dataTask(with: urlRequest, completionHandler: {
-            (data, response, error) -> Void in
-            
-            let httpResponse = response as! HTTPURLResponse
-            let statusCode = httpResponse.statusCode
-            
-            if (statusCode == 200) {
-                print("Everyone is fine, file downloaded successfully.")
-                
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! NSDictionary
-                    
-                    let nameData = (json["results"] as! NSArray)[0]["name"] as! NSDictionary
-                    let firstNameData = (nameData["first"] as? String)?.capitalized
-                    let lastNameData = (nameData["last"] as? String)?.capitalized
-                    let fullNameData = firstNameData! + " " + lastNameData!
-                    
-                    let loginData = (json["results"] as! NSArray)[0]["login"] as! NSDictionary
-                    let usernameData = loginData["username"] as? String
-                    
-                    let userEmail = (json["results"] as! NSArray)[0]["email"] as! String
-                    
-                    let userPhone = (json["results"] as! NSArray)[0]["cell"] as! String
-                    
-                    let imgData = (json["results"] as! NSArray)[0]["picture"] as! NSDictionary
-                    let userImg = imgData["large"] as? String
-                    
-                    DispatchQueue.main.async(execute: {
-                        if let imgUrl  = URL(string: userImg!), let data = try? Data(contentsOf: imgUrl) {
-                            self.imageView.image = UIImage(data: data)
-                        }
-                        
-                        self.nameLabel.text = fullNameData
-                        self.usernameLabel.text = usernameData
-                        
-                        self.emailLabel.setTitle(userEmail, for: UIControlState())
-                        self.emailAddress = userEmail
-
-                        self.phoneLabel.setTitle(userPhone, for: UIControlState())
-                        self.phoneNumber = userPhone
-                        
-                    })
-                    
-                    
-                    
-                } catch {
-                    print("Error with Json: \(error)")
-                }
-
-                
-            } else {
-                print("nothing happened?")
-            }
-        }) 
+//        let task = session.dataTask(with: urlRequest, completionHandler: {
+//            (data, response, error) -> Void in
+//            
+//            let httpResponse = response as! HTTPURLResponse
+//            let statusCode = httpResponse.statusCode
+//            
+//            if (statusCode == 200) {
+//                print("Everyone is fine, file downloaded successfully.")
+//                
+//                do {
+//                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! NSDictionary
+//                    
+//                    let nameData = (json["results"] as! NSArray)[0]["name"] as! NSDictionary
+//                    let firstNameData = (nameData["first"] as? String)?.capitalized
+//                    let lastNameData = (nameData["last"] as? String)?.capitalized
+//                    let fullNameData = firstNameData! + " " + lastNameData!
+//                    
+//                    let loginData = (json["results"] as! NSArray)[0]["login"] as! NSDictionary
+//                    let usernameData = loginData["username"] as? String
+//                    
+//                    let userEmail = (json["results"] as! NSArray)[0]["email"] as! String
+//                    
+//                    let userPhone = (json["results"] as! NSArray)[0]["cell"] as! String
+//                    
+//                    let imgData = (json["results"] as! NSArray)[0]["picture"] as! NSDictionary
+//                    let userImg = imgData["large"] as? String
+//                    
+//                    DispatchQueue.main.async(execute: {
+//                        if let imgUrl  = URL(string: userImg!), let data = try? Data(contentsOf: imgUrl) {
+//                            self.imageView.image = UIImage(data: data)
+//                        }
+//                        
+//                        self.nameLabel.text = fullNameData
+//                        self.usernameLabel.text = usernameData
+//                        
+//                        self.emailLabel.setTitle(userEmail, for: UIControlState())
+//                        self.emailAddress = userEmail
+//
+//                        self.phoneLabel.setTitle(userPhone, for: UIControlState())
+//                        self.phoneNumber = userPhone
+//                        
+//                    })
+//                    
+//                    
+//                    
+//                } catch {
+//                    print("Error with Json: \(error)")
+//                }
+//
+//                
+//            } else {
+//                print("nothing happened?")
+//            }
+//        }) 
         
+        guard let requestUrl = URL(string:myUrl) else { return }
+        let request = URLRequest(url:requestUrl)
+        let task = session.dataTask(with: request) {
+            (data, response, error) in
+            if error == nil {
+                
+                                do {
+                                    let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any]
+                
+                                   
+                                    
+                                    if let dataDict = user as? [String:AnyObject] {
+                                        var email     = dataDict["email"] as? String
+                                        let firstName = dataDict["first_name"] as? String
+                                        let lastName  = dataDict["last_name"] as? String
+                                        
+                                        //self.nameLabel.text = "\(firstName!) \(lastName!)"
+                                        
+                                        var pictureUrl = ""
+                                        
+                                        if let picture = dataDict["picture"] as? [String:AnyObject], let data = picture["data"] as? [String:AnyObject], let url = data["url"] as? String {
+                                            pictureUrl = url
+                                        }
+                                    }
+                                    
+                                    
+                                    
+                                    
+//                                    
+//                                    
+//                                    let nameData = (json["results"] as! NSArray)[0]["name"] as! [String:Any]
+//                                    let firstNameData = (nameData["first"] as? String)?.capitalized
+//                                    let lastNameData = (nameData["last"] as? String)?.capitalized
+//                                    let fullNameData = firstNameData! + " " + lastNameData!
+//                
+//                                    let loginData = (json["results"] as! NSArray)[0]["login"] as! NSDictionary
+//                                    let usernameData = loginData["username"] as? String
+//                
+//                                    let userEmail = (json["results"] as! NSArray)[0]["email"] as! String
+//                
+//                                    let userPhone = (json["results"] as! NSArray)[0]["cell"] as! String
+//                
+//                                    let imgData = (json["results"] as! NSArray)[0]["picture"] as! NSDictionary
+//                                    let userImg = imgData["large"] as? String
+                
+                                    DispatchQueue.main.async(execute: {
+                                        if let imgUrl  = URL(string: userImg!), let data = try? Data(contentsOf: imgUrl) {
+                                            self.imageView.image = UIImage(data: data)
+                                        }
+                
+                                        self.nameLabel.text = fullNameData
+                                        self.usernameLabel.text = usernameData
+                
+                                        self.emailLabel.setTitle(userEmail, for: UIControlState())
+                                        self.emailAddress = userEmail
+                
+                                        self.phoneLabel.setTitle(userPhone, for: UIControlState())
+                                        self.phoneNumber = userPhone
+                                        
+                                    })
+                                    
+                                    
+                                    
+                                } catch {
+                                    print("Error with Json: \(error)")
+                                }
+
+            }
+        }
+
         task.resume()
         
         
